@@ -10,7 +10,12 @@
 Thumbs.db
 
 # composer vendor dir
-/vendor
+/vendor/*
+!/vendor/
+/vendor/bower/*
+!/vendor/bower/
+/vendor/bower/developer/
+!/vendor/bower/developer/
 # cubrid install dir
 /cubrid
 
