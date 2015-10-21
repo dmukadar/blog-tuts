@@ -114,12 +114,6 @@ iframe {
     -webkit-overflow-scrolling:touch;
 }
 */
-/* ======= Menu ======= */
-.menu{
-	padding: 30px 0;
-  background: #f5f5f5;
-  border-top: 10px solid #778492;
-}
 
 /* ======= Header ======= */
 .header {
