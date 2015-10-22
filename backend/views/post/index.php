@@ -4,17 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UsersSearch */
+/* @var $searchModel app\models\PostSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Posts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="post-index">
+
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Users', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -24,14 +26,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'username',
-            'password',
-            'salt',
-            'email:email',
-            // 'profile:ntext',
+            'title',
+            'content:ntext',
+            'tags',
+            'status',
             // 'create_time',
             // 'update_time',
+            // 'slug',
+            // 'author_id',
+            // 'image',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
+</div>

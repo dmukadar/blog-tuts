@@ -17,7 +17,11 @@
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.5",
         "yiisoft/yii2-bootstrap": "*",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-swiftmailer": "*",
+        "mihaildev/yii2-ckeditor": "*",
+	"unclead/yii2-multiple-input": "~1.0",
+        "kartik-v/yii2-widget-typeahead": "*",
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

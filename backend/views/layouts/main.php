@@ -320,6 +320,11 @@ AppAsset::register($this);
             <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>
+        <li>
+          <a href="index.php?r=post">
+            <i class="fa fa-edit"></i> <span>Post</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2015 at 09:04 AM
+-- Generation Time: Oct 22, 2015 at 12:11 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -46,14 +46,25 @@ CREATE TABLE IF NOT EXISTS `tbl_comment` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_image` (
-  `id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `caption` varchar(255) NOT NULL,
   `path` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `post_id` int(5) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+
+--
+-- Dumping data for table `tbl_image`
+--
+
+INSERT INTO `tbl_image` (`id`, `caption`, `path`, `url`, `post_id`) VALUES
+(1, 'test', '/opt/openbravo', '', 1),
+(2, 'test', 'image/upload/test_index.jpeg', '', 20),
+(21, 'test1', 'image/upload/21/test1/images.jpeg', '', 21),
+(22, 'test1', 'image/upload/21/test1/index.jpeg', '', 21),
+(23, 'test1', 'image/upload/21/test1/index2.jpeg', '', 21);
 
 -- --------------------------------------------------------
 
@@ -77,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `tbl_lookup` (
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_post` (
-  `id` int(5) NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
   `tags` varchar(255) NOT NULL,
@@ -86,10 +97,27 @@ CREATE TABLE IF NOT EXISTS `tbl_post` (
   `update_time` date NOT NULL,
   `slug` varchar(255) NOT NULL,
   `author_id` int(5) NOT NULL,
+  `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `author_id` (`author_id`),
   KEY `author_id_2` (`author_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `tbl_post`
+--
+
+INSERT INTO `tbl_post` (`id`, `title`, `content`, `tags`, `status`, `create_time`, `update_time`, `slug`, `author_id`, `image`) VALUES
+(1, 'asdsad', 'asdas', 'asdsa', '1', '2015-10-22', '2015-10-22', '', 6, ''),
+(7, 'test', '<p>test</p>\r\n', 'test', '1', '2015-10-22', '2015-10-22', '', 6, ''),
+(12, 'test', '<p>test</p>\r\n', 'test', '1', '2015-10-22', '2015-10-22', '', 6, ''),
+(13, 'test', '<p>test</p>\r\n', 'test', '1', '2015-10-22', '2015-10-22', '', 6, ''),
+(14, 'test', '<p>test</p>\r\n', 'test', '1', '2015-10-22', '2015-10-22', '', 6, ''),
+(15, 'test', '<p>test</p>\r\n', 'test', '1', '2015-10-22', '2015-10-22', '', 6, ''),
+(18, 'test', '<p>test</p>\r\n', 'test', 'test', '2015-10-22', '2015-10-22', '', 6, 'upload/test_images.jpeg'),
+(19, 'test', '<p>test</p>\r\n', 'test', 'test', '2015-10-22', '2015-10-22', '', 6, ''),
+(20, 'test', '<p>test</p>\r\n', 'test', '2', '2015-10-22', '2015-10-22', '', 6, 'image/upload/test_index.jpeg'),
+(21, 'test1', '<p>test1</p>\r\n', 'test1', '1', '2015-10-22', '2015-10-22', '', 6, '');
 
 -- --------------------------------------------------------
 
@@ -119,8 +147,17 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `profile` text NOT NULL,
   `create_time` date NOT NULL,
   `update_time` date NOT NULL,
+  `authKey` varchar(255) NOT NULL,
+  `accessToken` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `tbl_users`
+--
+
+INSERT INTO `tbl_users` (`id`, `username`, `password`, `salt`, `email`, `profile`, `create_time`, `update_time`, `authKey`, `accessToken`) VALUES
+(6, 'karsa', '1234', '1', 'karsa@gmail.com', 'mochamad karsa syaifudin jupri', '2015-10-20', '2015-10-20', '1', '');
 
 --
 -- Constraints for dumped tables

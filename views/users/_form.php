@@ -8,9 +8,6 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<section class="about section">
-	<div class="section-inner">
-
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
@@ -28,6 +25,3 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
-
-	</div>
-</section>

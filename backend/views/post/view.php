@@ -4,12 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Users */
+/* @var $model app\models\Post */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="post-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -28,12 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'username',
-            'password',
-            'salt',
-            'email:email',
-            'profile:ntext',
+            'title',
+            'content:ntext',
+            'tags',
+            'status',
             'create_time',
             'update_time',
+            'slug',
+            'author_id',
+            'image',
         ],
     ]) ?>
+
+</div>

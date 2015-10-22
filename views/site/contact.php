@@ -11,8 +11,6 @@ use yii\captcha\Captcha;
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<section class="about section">
-	<div class="section-inner">
 	    <h1><?= Html::encode($this->title) ?></h1>
 
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
@@ -66,5 +64,3 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
     <?php endif; ?>
-    </div>  
-</section>  
