@@ -27,8 +27,8 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name', 'frequency'], 'required'],
-            [['id', 'frequency'], 'integer'],
+            [['name', 'frequency'], 'required'],
+            [['frequency'], 'integer'],
             [['name'], 'string', 'max' => 255]
         ];
     }
@@ -43,5 +43,19 @@ class Tag extends \yii\db\ActiveRecord
             'name' => 'Name',
             'frequency' => 'Frequency',
         ];
+    }
+    
+    public static function findTags()
+    {
+    	return self::find()->where('frequency >= 1')->all();
+    }
+    
+    public function scopes()
+    {
+    	return array(
+    			'tagList'=>array(
+    					'condition'=>'frequency >= 1',
+    			),
+    	);
     }
 }

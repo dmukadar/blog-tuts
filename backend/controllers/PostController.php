@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use app\models\Image;
+use app\models\Tag;
+use yii\helpers\ArrayHelper;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -66,13 +68,11 @@ class PostController extends Controller
         $model = new Post();
         
         if ($model->load(Yii::$app->request->post())) {
-        	
         	$imageCaption = $model->title;
-        	
         	$file2 = UploadedFile::getInstances($model, 'file');
-
+        	
         	foreach ($file2 as $fileImage)
-        	{        		
+        	{
         		$model->save();
         		$pathType = $imageDir.$model->id.'/'.$imageCaption;
         		$path = $pathType.'/'.$fileImage->name;
@@ -83,13 +83,15 @@ class PostController extends Controller
         		
         		$fileImage->saveAs($path);
         	}
-        	
         	$model->save();
         	
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+        	$tag = Tag::findTags();
+        	$tagsList = ArrayHelper::map($tag, 'id', 'name');
             return $this->render('create', [
                 'model' => $model,
+            	'tagsList' => $tagsList
             ]);
         }
     }
@@ -128,8 +130,11 @@ class PostController extends Controller
         	
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
+        	$tag = Tag::findTags();
+        	$tagsList = ArrayHelper::map($tag, 'id', 'name');
+            return $this->render('create', [
                 'model' => $model,
+            	'tagsList' => $tagsList
             ]);
         }
     }
@@ -142,6 +147,14 @@ class PostController extends Controller
      */
     public function actionDelete($id)
     {
+    	$imageRecord = Image::find()->where('post_id = '.$id)->all();
+    	foreach ($imageRecord as $row){
+    		$row->delete();
+    	}
+    	
+    	$model = new Post();
+    	$model->minusFrequencyTag($id);
+    	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -164,14 +177,13 @@ class PostController extends Controller
     }
     
     public function actionFoto_hps($id,$id_image){
-    	
     	$foto = Image::find()->where(['id'=>$id_image])->one()->path;
     	if($foto){
     		if(!unlink($foto)){
     			return false;
     		}
     	}
-    	
+    	 
     	$imageRecord = Image::findOne($id_image);
     	$imageRecord->delete();
     	 

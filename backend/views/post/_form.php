@@ -1,32 +1,15 @@
-<head> 
-	<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
-</head>
-
 <?php
 
 use yii\helpers\Html;
 
 use yii\widgets\ActiveForm;
 use mihaildev\ckeditor\CKEditor;
-use dosamigos\fileinput\FileInput;
-use dosamigos\fileinput\BootstrapFileInput;
 use app\models\Image;
 use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */
 /* @var $form yii\widgets\ActiveForm */
-$data = [
-		"red" => "red",
-		"green" => "green",
-		"blue" => "blue",
-		"orange" => "orange",
-		"white" => "white",
-		"black" => "black",
-		"purple" => "purple",
-		"cyan" => "cyan",
-		"teal" => "teal"
-];
 
 ?>
 
@@ -43,8 +26,18 @@ $data = [
 		    ],
 		]);    
     ?>
-    
-    <?= $form->field($model, 'tags')->textInput(['maxlength' => true])?>
+
+    <?php 
+    	echo $form->field($model, 'tags')->widget(Select2::className(),[
+		    'data' => $tagsList,
+		    'options' => ['placeholder' => 'Select a color ...', 'multiple' => false],
+		    'pluginOptions' => [
+		        'tags' => true,
+		        'maximumInputLength' => 10
+		    ]
+    	]);
+    	
+    ?>
     
 	<?= $form->field($model, 'file[]')->fileInput(['multiple'=>true]); ?>
 
@@ -68,7 +61,4 @@ $data = [
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>

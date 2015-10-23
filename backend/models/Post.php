@@ -42,12 +42,11 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['title', 'content', 'tags', 'status'], 'required'],
             [['content'], 'string'],
-            [['create_time', 'update_time'], 'safe'],
+            [['create_time', 'update_time','file'], 'safe'],
             [['author_id'], 'integer'],
         	[['create_time', 'update_time'], 'default', 'value' => date("Y-m-d h:i:s")],
-        		[['create_time', 'update_time','file'], 'safe'],
-        		[['file'],'file','extensions'=>'jpg, gif, png'],
-            [['title', 'tags', 'status', 'slug', 'image'], 'string', 'max' => 255]
+        	[['file'],'file','extensions'=>'jpg, gif, png'],
+            [['title', 'status', 'slug'], 'string', 'max' => 255]
         ];
     }
 
@@ -98,7 +97,37 @@ class Post extends \yii\db\ActiveRecord
     	parent::beforeSave($insert);
     	$users = Users::find()->where(['username'=>'karsa'])->one();
     	$this->author_id = $users->id;
-    	 
+    	$this->tags = self::findTags($this->tags);
+
     	return true;
+    }
+    
+    public function findTags($tags) {
+    		$tag = Tag::findOne($tags); 
+    		
+    		if(!isset($tag)){
+    			$tag = new Tag();
+    			$tag->name = $tags;
+    			$tag->frequency = 1;
+    			$tag->save();
+    		}else{
+    			$tag->frequency = $tag->frequency + 1;
+    			$tag->update();
+    		}
+    		$tagName = $tag->id;
+    		
+    		return $tagName;
+    }
+    
+    public function minusFrequencyTag($id){
+    	$post = self::findOne($id);
+    	$tag = Tag::findOne($post->tags);
+    	if($tag->frequency <= 1){
+    		$tag->delete();
+    	}else{
+    		$tag->frequency = $tag->frequency - 1;
+    		$tag->update();
+    	}
+    	    	
     }
 }
