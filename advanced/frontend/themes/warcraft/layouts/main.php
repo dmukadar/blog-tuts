@@ -28,7 +28,7 @@ use yii\debug\Toolbar;
                <div class="site_title">
                        <h1><a href="http://demo.templatepanic.com" title="WP Theme Demo
 home page"><?php echo Html::encode(\Yii::$app->name); ?></a></h1>
-                       <div class="description">Here goes your great motto</div>
+                       <div class="description">The complete hero blog </div>
                </div> <!-- end site_title -->
 
                <div class="topmenu">
@@ -39,9 +39,6 @@ home page"><?php echo Html::encode(\Yii::$app->name); ?></a></h1>
                       array('label' => 'Home', 'url' => array('/site/index')),
                       array('label' => 'About', 'url' => array('/site/about')),
                       array('label' => 'Contact', 'url' => array('/site/contact')),
-                      Yii::$app->user->isGuest ?
-                        array('label' => 'Login', 'url' => array('/site/login')) :
-                        array('label' => 'Logout (' . Yii::$app->user->identity->username .')' , 'url' => array('/site/logout')),
                     ),
                   )); ?>
                </div> <!-- end topmenu -->

@@ -7,6 +7,9 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\TblPost;
+use frontend\models\TblTag;
+use frontend\models\TblComment;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -72,7 +75,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $posts = TblPost::find()->indexBy('id')->orderby(['id' => SORT_DESC])->all();  
+        $komentars = TblComment::find()->orderby(['id'=>SORT_DESC])->one();
+        $terms = TblTag::find()->all();
+        return $this->render('index', ['posts' => $posts, 'komentars' => $komentars, 'terms'=>$terms ]);
     }
 
     /**
